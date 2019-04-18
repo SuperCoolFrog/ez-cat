@@ -1,0 +1,19 @@
+h1 {
+    text-align: center;
+}
+
+.hidden, .validation-error.hidden {
+    display: none;
+}
+.validation-error {
+    color: red;
+    font-size: 14px;
+    padding: 0 1em 0 1em;
+    display: inline-block;
+    border-radius: 15px;
+    margin-top: 4px;
+}
+
+#project-name-section {
+    margin-top: 4px;
+}

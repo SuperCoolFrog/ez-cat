@@ -1,0 +1,24 @@
+{
+  "name": "ez-cat",
+  "version": "1.0.0",
+  "description": "A minimal Tomcat management application",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "https://github.com/SuperCoolFrog/ez-cat",
+  "keywords": [
+    "Electron",
+    "quick",
+    "Tomcat",
+    "GUI"
+  ],
+  "author": "Michael Vasquez",
+  "devDependencies": {
+    "electron": "^4.1.4"
+  },
+  "dependencies": {
+    "fs-extra": "^7.0.1",
+    "ncp": "^2.0.0"
+  }
+}

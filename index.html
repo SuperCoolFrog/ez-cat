@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>EZ Cat</title>
+    <link href="./styles.css" rel="stylesheet">
+  </head>
+  <body>
+    <h1>EZ Cat</h1>
+    <section id="tomcat-dir-container">
+      <label for="tomcat-dir">
+        Tomcat Directory
+      </label>
+      <input id="tomcat-dir" type="file" webkitdirectory />
+      <button id="start" disabled>Start</button>
+      <button id="stop" disabled>Stop</button>
+      <div id="tomcat-dir-validation-error" class="validation-error">
+        You must select your Tomcat directory.
+      </div>
+    </section>
+    <section id="project-dir-container">
+      <hr>
+      <div>
+        <label for="project-dir">
+          Project Directory
+        </label>
+        <input id="project-dir" type="file" webkitdirectory />
+        <button id="update" disabled>
+          Update
+        </button>
+      </div>
+      <div id="project-name-section" class="hidden">
+        <label for="project-name">
+          Project Name
+        </label>
+        <input id="project-name" />
+      </div>
+      <div id="project-dir-validation-error" class="validation-error">
+        You must select a project directory.
+      </div>
+      <hr>
+    </section>
+    <section id="existing-projects-container">
+      <label for="existing-projects">Existing Projects</label>
+      <br>
+      <div id="existing-projects-validation-error" class="validation-error">
+        Select a Tomcat directory to view existing projects
+      </div>
+      <select id="existing-projects" class="hidden" size="8" multiple>
+          <!-- Dynamic Content will go here -->
+      </select>
+      <br>
+      <button id="remove-projects" class="hidden">Remove Projects</button>
+    </section>
+
+    <script src="./app-main.js"></script>
+  </body>
+</html>
