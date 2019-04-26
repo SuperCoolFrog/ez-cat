@@ -1,9 +1,9 @@
 const fs = require('fs-extra');
-const exec = require('child_process').exec;
 const ncp = require('ncp').ncp;
 const path = require('path');
+const { userSettings, updateUserSetting } = require('./user-settings.js');
+const { execTomcat } = require('./tomcat-commands.js');
 
-const isWindows = process.platform === "win32";
 
 (function() {
   const tomcatDirectoryInput = document.getElementById('tomcat-dir');
@@ -18,52 +18,6 @@ const isWindows = process.platform === "win32";
   const projectDirValidationError = document.getElementById('project-dir-validation-error');
   const existingProjectsSelector = document.getElementById('existing-projects');
   const existingProjectValidationError = document.getElementById('existing-projects-validation-error');
-
-
-  const userSettings = {
-    startScript: isWindows ? 'startup.bat' : 'startup.sh',
-    shutdownScript: isWindows ? 'shutdown.bat' : 'shutdown.sh',
-    webapps: 'webapps',
-    serverConfig: {
-      path: 'conf/server.xml',
-      value: null,
-    },
-    defaultApps: [
-      'ROOT',
-      'docs',
-      'examples',
-      'host-manager',
-      'manager',
-    ],
-
-  };
-
-  function execute(command, cwd, callback) {
-    exec(command, {
-      cwd: cwd,
-    }, (error, stdout, stderr) => {
-      if(error) {
-        alert('ERROR: ' + error.message);
-      } else {
-        callback(stdout);
-      }
-    });
-  }
-
-  function execTomcat(script, defaultMessage) {
-    return function() {
-      const {
-        tomcatPath,
-      } = userSettings;
-      const cwd = path.join(tomcatPath, 'bin');
-
-      execute(script, cwd, function(output) {
-        if (!isWindows) {
-          alert(output || defaultMessage);
-        }
-      });
-    };
-  }
 
   function addOption(value) {
     const option = document.createElement('option');
@@ -95,7 +49,7 @@ const isWindows = process.platform === "win32";
   }
 
   tomcatDirectoryInput.onchange = function() {
-    userSettings.tomcatPath = tomcatDirectoryInput.files[0].path;
+    updateUserSetting('tomcatPath' , tomcatDirectoryInput.files[0].path);
 
     startButton.removeAttribute('disabled');
     stopButton.removeAttribute('disabled');
@@ -110,7 +64,7 @@ const isWindows = process.platform === "win32";
 
   projectDirectoryInput.onchange = function() {
     const projectPath = projectDirectoryInput.files[0].path;
-    userSettings.projectPath = projectPath;
+    updateUserSetting('projectPath', projectPath);
     projectNameInput.value = path.basename(projectPath);
 
     updateButton.removeAttribute('disabled');
